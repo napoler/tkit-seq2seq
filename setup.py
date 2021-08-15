@@ -47,7 +47,7 @@ setup(
 
 
     # ],
-    packages=['Demo'])
+    packages=['tkitSeq2seq'])
 
 """
 pip freeze > requirements.txt

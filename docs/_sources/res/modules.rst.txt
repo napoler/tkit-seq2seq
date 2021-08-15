@@ -1,7 +1,7 @@
-Demo
-====
+tkitSeq2seq
+===========
 
 .. toctree::
    :maxdepth: 4
 
-   Demo
+   tkitSeq2seq
