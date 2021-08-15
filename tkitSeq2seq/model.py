@@ -14,9 +14,9 @@ import torch.optim as optim
 from tqdm.auto import tqdm
 import torchmetrics
 
-from encoder import EncoderRNN
+from .encoder import EncoderRNN
 
-from  decoder import DecoderRNN
+from  .decoder import DecoderRNN
 
 
 class autoEncDec(pl.LightningModule):
