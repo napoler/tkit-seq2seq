@@ -13,7 +13,7 @@
 # 生成配置文件
 Dump default configuration to have as reference
 
-> python  tkitSeq2seq/trainer.py --print_config > default_config.yaml
+> python  trainer.py --print_config > default_config.yaml
 
 # Create config including only options to modify
 > nano config.yaml
@@ -22,7 +22,7 @@ Dump default configuration to have as reference
 Run training using created configuration
 
 
-> python tkitSeq2seq/trainer.py--config config.yaml
+> python trainer.py--config config.yaml
 
 
 核心训练模块

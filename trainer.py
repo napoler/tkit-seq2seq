@@ -2,7 +2,7 @@
 
 
 from pytorch_lightning.utilities.cli import LightningCLI
-from .model import autoEncDec
+from tkitSeq2seq.model import autoEncDec
 
 """  
 

@@ -28,14 +28,6 @@ tkitSeq2seq.model module
    :undoc-members:
    :show-inheritance:
 
-tkitSeq2seq.trainer module
---------------------------
-
-.. automodule:: tkitSeq2seq.trainer
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Module contents
 ---------------
 
