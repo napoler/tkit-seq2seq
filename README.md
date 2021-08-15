@@ -10,6 +10,10 @@
 
 
 
+安装解析配置文件
+
+pip install jsonargparse[signatures]
+
 # 生成配置文件
 Dump default configuration to have as reference
 
@@ -24,6 +28,12 @@ Run training using created configuration
 
 > python trainer.py--config config.yaml
 
+
+
+
+运行示例
+
+https://www.kaggle.com/terrychanorg/tkitseq2seq-notebook5c33cc1be2
 
 核心训练模块
 

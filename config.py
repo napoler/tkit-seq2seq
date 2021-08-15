@@ -1,5 +1,5 @@
 name='tkitSeq2seq'#修改包名字-
-version='0.0.0.1 '
+version='0.0.0.3'
 description='Terry toolkit tkitSeq2seq'
 author='Terry Chan'
 author_email='napoler2008@gmail.com'
