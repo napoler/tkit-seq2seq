@@ -6,18 +6,14 @@
 
 
 
-
-
-
-
 安装解析配置文件
 
-pip install jsonargparse[signatures]
+> pip install jsonargparse[signatures]
 
 # 生成配置文件
 Dump default configuration to have as reference
 
-> python  trainer.py --print_config > default_config.yaml
+> python trainer.py fit --print_config > config/cpu_config.yaml
 
 # Create config including only options to modify
 > nano config.yaml
@@ -26,7 +22,7 @@ Dump default configuration to have as reference
 Run training using created configuration
 
 
-> python trainer.py--config config.yaml
+> python trainer.py fit --config config/cpu_config.yaml
 
 
 

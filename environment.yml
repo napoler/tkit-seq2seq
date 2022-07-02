@@ -118,4 +118,3 @@ dependencies:
     - yarg==0.1.9
     - yarl==1.6.3
     - zipp==3.5.0
-prefix: /mnt/data/dev/anaconda3/envs/tkit-seq2seq39
