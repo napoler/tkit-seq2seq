@@ -22,14 +22,14 @@ class DecoderRNN(nn.Module):
         self.out = nn.Linear(hidden_size, output_size)
         self.softmax = nn.LogSoftmax(dim=1)
 
-    def forward(self, input, hidden):
-        output = self.embedding(input)
+    def forward(self, input_data, hidden):
+        output = self.embedding(input_data)
         # output=self.d(output)
         # # hidden=self.d(hidden)
         # output = F.tanh(output)
-        hidden = self.d(hidden)
+        # hidden = self.d(hidden)
         output, hidden = self.gru(output, hidden)
         #         output = self.softmax(self.out(output[0]))
+        output = self.d(output)
         output = self.softmax(self.out(output.squeeze(0)))
-        # output = self.out(output)
         return output, hidden
