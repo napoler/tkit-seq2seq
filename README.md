@@ -4,13 +4,15 @@
 
 基于gru
 
-
+1. 使用双向BiGRU做编码
+2. 编码层加入注意力操作
 
 安装解析配置文件
 
 > pip install jsonargparse[signatures]
 
 # 生成配置文件
+
 Dump default configuration to have as reference
 
 > python trainer.py fit --print_config > config/cpu_config.yaml
