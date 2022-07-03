@@ -1,22 +1,17 @@
 # -*- coding: utf-8 -*-
-import pickle
-import torch, random
-from torch import nn
-import torch.nn.functional as F
-from torch.utils.data import DataLoader, random_split, TensorDataset
 import pytorch_lightning as pl
-from pytorch_lightning import Trainer, seed_everything
-from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor
-# 自动停止
-# https://pytorch-lightning.readthedocs.io/en/1.2.1/common/early_stopping.html
-from pytorch_lightning.callbacks.early_stopping import EarlyStopping
+import random
+import torch
 import torch.optim as optim
-from tqdm.auto import tqdm
 import torchmetrics
-
-from .encoder import EncoderRNN
+from torch.utils.data import DataLoader
 
 from .decoder import DecoderRNN
+from .encoder import EncoderRNN
+
+
+# 自动停止
+# https://pytorch-lightning.readthedocs.io/en/1.2.1/common/early_stopping.html
 
 
 class autoEncDec(pl.LightningModule):
@@ -49,7 +44,7 @@ class autoEncDec(pl.LightningModule):
     #         self.encoder_hidden = self.enc.initHidden()
 
     def forward(self, x, y, x_attention_mask, y_attention_mask, **kwargs):
-
+        # 修改数据形状为 seqLEN,batch_size
         x = x.permute(1, 0)  # seqLEN,batch_size
         y = y.permute(1, 0)  # seqLEN,batch_size
         teacher_forcing_ratio = self.hparams.teacher_forcing_ratio
