@@ -44,6 +44,8 @@ https://pytorch-lightning.readthedocs.io/en/latest/common/lightning_cli.html
 
 数据构建
 
+示例数据(加法计算模型，使用tokenizer目录里的小词典)
+> python demo.py
 https://github.com/napoler/BulidDataset
 Seq2seq
 https://github.com/napoler/BulidDataset/blob/main/buildDataSeq2seq.py

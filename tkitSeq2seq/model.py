@@ -92,7 +92,7 @@ class autoEncDec(pl.LightningModule):
             # get the highest predicted token from our predictions.
             # 从我们的预测中获得最高的预测令牌。
             top1 = output.argmax(1)
-            print(top1)
+            # print(top1)
             # update input : use ground_truth when teacher_force
             # 更新输入
             dec_input = y[i] if teacher_force else top1
@@ -112,6 +112,10 @@ class autoEncDec(pl.LightningModule):
         # It is independent of forward
         x, x_attention_mask, y, y_attention_mask = batch
         loss, outputs = self(x, y, x_attention_mask, y_attention_mask)
+
+        acc = self.accuracy(outputs.reshape(-1, self.hparams.output_vocab_size, ), y.reshape(-1))
+        metrics = {"train_acc": acc}
+        self.log_dict(metrics)
         self.log('train_loss', loss)
         return loss
 
