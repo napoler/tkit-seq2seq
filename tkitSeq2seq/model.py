@@ -25,9 +25,21 @@ class autoEncDec(pl.LightningModule):
 
     # class COCO(nn.Module):
     def __init__(
-            self, learning_rate=3e-4, T_max=5, hidden_size=256, input_vocab_size=30522, output_vocab_size=21128,
-            ignore_index=0, teacher_forcing_ratio=0.5, en_num_layers=2, de_num_layers=2, optimizer_name="AdamW",
-            batch_size=2, trainfile="./data/train.pkt", valfile="./data/val.pkt", testfile="./data/test.pkt", **kwargs):
+            self, learning_rate=3e-4,
+            T_max=5,
+            hidden_size=256,
+            input_vocab_size=30522,
+            output_vocab_size=21128,
+            ignore_index=0,
+            teacher_forcing_ratio=0.5,  # 设置训练的比例
+            en_num_layers=2,  # 大于2层 使用双向gru
+            de_num_layers=2,
+            optimizer_name="AdamW",
+            batch_size=2,
+            trainfile="./data/train.pkt",
+            valfile="./data/val.pkt",
+            testfile="./data/test.pkt",
+            **kwargs):
         super().__init__()
         self.save_hyperparameters()
         # SRC_SEQ_LEN=128
@@ -65,10 +77,8 @@ class autoEncDec(pl.LightningModule):
 
         loss = None
         #         dec_input=x_output.long()
-        """
-        逐个字符进行训练，更新网络
-        
-        """
+        # 逐个字符进行训练，更新网络
+
         for i in range(y.shape[0]):
             #  print("dec_input",dec_input,dec_input.size())
             output, hidden = self.dec(dec_input, hidden)
@@ -82,6 +92,7 @@ class autoEncDec(pl.LightningModule):
             # get the highest predicted token from our predictions.
             # 从我们的预测中获得最高的预测令牌。
             top1 = output.argmax(1)
+            print(top1)
             # update input : use ground_truth when teacher_force
             # 更新输入
             dec_input = y[i] if teacher_force else top1
@@ -93,7 +104,7 @@ class autoEncDec(pl.LightningModule):
                 loss = loss_fc(output, y[i])
 
         loss = loss / y.shape[0]
-
+        # 转变为 Batch，seqLEN,hidden
         return loss, outputs.permute(1, 0, 2)
 
     def training_step(self, batch, batch_idx):

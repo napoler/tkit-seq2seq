@@ -41,3 +41,9 @@ https://www.kaggle.com/terrychanorg/tkitseq2seq-notebook5c33cc1be2
 核心训练模块
 
 https://pytorch-lightning.readthedocs.io/en/latest/common/lightning_cli.html
+
+数据构建
+
+https://github.com/napoler/BulidDataset
+Seq2seq
+https://github.com/napoler/BulidDataset/blob/main/buildDataSeq2seq.py
