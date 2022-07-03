@@ -55,6 +55,7 @@ class autoEncDec(pl.LightningModule):
         teacher_forcing_ratio = self.hparams.teacher_forcing_ratio
         loss_fc = torch.nn.CrossEntropyLoss(ignore_index=self.hparams.ignore_index)
         trg_len, batch_size = y.size()
+        # 构建空数据
         outputs = torch.zeros(trg_len, batch_size, self.hparams.output_vocab_size).to(self.device)
         dec_input = torch.zeros(1, batch_size).to(self.device).long()
         #         dec_input = y[0, :]
@@ -69,22 +70,29 @@ class autoEncDec(pl.LightningModule):
 
         loss = None
         #         dec_input=x_output.long()
+        """
+        逐个字符进行训练，更新网络
+        
+        """
         for i in range(y.shape[0]):
-            #             print("dec_input",dec_input,dec_input.size())
+            #  print("dec_input",dec_input,dec_input.size())
             output, hidden = self.dec(dec_input, hidden)
             #             print("output",output,output.size())
 
             outputs[i] = output
 
             # decide if we are going to use teacher forcing or not.
+            # 决定我们是否使用教师强制。
             teacher_force = random.random() < teacher_forcing_ratio
             # get the highest predicted token from our predictions.
+            # 从我们的预测中获得最高的预测令牌。
             top1 = output.argmax(1)
-            # update input : use ground_truth when teacher_force 
+            # update input : use ground_truth when teacher_force
+            # 更新输入
             dec_input = y[i] if teacher_force else top1
             dec_input = dec_input.unsqueeze(0)
-
-            if loss != None:
+            # 和下一个字做计算loss
+            if loss is not None:
                 loss += loss_fc(output, y[i])
             else:
                 loss = loss_fc(output, y[i])

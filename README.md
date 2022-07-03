@@ -18,14 +18,19 @@ Dump default configuration to have as reference
 > python trainer.py fit --print_config > config/cpu_config.yaml
 
 # Create config including only options to modify
+
 > nano config.yaml
 
 # 运行训练操作
+
 Run training using created configuration
 
 
 > python trainer.py fit --config config/cpu_config.yaml
 
+# 查看日志
+
+> tensorboard --logdir lightning_logs
 
 
 
